@@ -5,13 +5,16 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "start:api": "ts-node packages/api/index.ts"
+    "generate:prisma-client": "cd packages/api/prisma && npx prisma generate",
+    "build": "tsc --outDir ./dist",
+    "start:dev": "npm run generate:prisma-client && npm run build && concurrently \"tsc --watch --outDir ./dist\" \"nodemon ./dist/api/index.js\""
   },
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
-    "ts-node": "^10.9.2",
+    "concurrently": "^9.0.1",
+    "nodemon": "^3.1.6",
     "typescript": "^5.6.2"
   }
 }

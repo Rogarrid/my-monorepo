@@ -8,6 +8,7 @@
     "forceConsistentCasingInFileNames": true
   },
   "baseUrl": "./",
+  "outDir": "./dist",
   "paths": {
     "@packages/*": ["packages/*"]
   },

@@ -1,9 +1,9 @@
 import Fastify from "fastify";
-import helloRoutes from "./routes/user";
+import userRoute from "./routes/user";
 
 const fastify = Fastify({ logger: true });
 
-fastify.register(helloRoutes);
+fastify.register(userRoute);
 
 fastify.listen({ port: 3000 }, (err, address) => {
   if (err) {
