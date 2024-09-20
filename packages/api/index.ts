@@ -1,10 +1,9 @@
 import Fastify from "fastify";
+import helloRoutes from "./routes/hello";
 
 const fastify = Fastify({ logger: true });
 
-fastify.get("/", async (request, reply) => {
-  return { hello: "world" };
-});
+fastify.register(helloRoutes);
 
 fastify.listen({ port: 3000 }, (err, address) => {
   if (err) {

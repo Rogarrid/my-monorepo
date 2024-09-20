@@ -5,7 +5,7 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node packages/api/index.ts"
+    "start:api": "ts-node packages/api/index.ts"
   },
   "workspaces": [
     "packages/*"
