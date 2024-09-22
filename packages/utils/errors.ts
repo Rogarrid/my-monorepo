@@ -6,7 +6,6 @@ export function getErrorMessage(error: any, reply: any) {
     });
   }
   if (error.message) {
-    console.log(error);
     return reply.send({
       code: error.statusCode,
       message: error.message,

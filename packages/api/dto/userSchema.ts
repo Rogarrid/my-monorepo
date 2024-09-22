@@ -1,9 +1,21 @@
-export const createUserSchema = {
+export const signUpSchema = {
   body: {
     type: "object",
-    required: ["name", "email", "password"],
+    required: ["name", "email", "role", "password"],
     properties: {
       name: { type: "string" },
+      role: { type: "string" },
+      email: { type: "string", format: "email" },
+      password: { type: "string" },
+    },
+  },
+};
+
+export const loginSchema = {
+  body: {
+    type: "object",
+    required: ["email", "password"],
+    properties: {
       email: { type: "string", format: "email" },
       password: { type: "string" },
     },

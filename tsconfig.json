@@ -12,5 +12,5 @@
   "paths": {
     "@packages/*": ["packages/*"]
   },
-  "include": ["packages/**/*"]
+  "include": ["packages/**/*", "packages/api/types/**/*"]
 }

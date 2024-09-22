@@ -5,13 +5,17 @@
   "license": "MIT",
   "dependencies": {
     "@fastify/websocket": "^11.0.0",
-    "@prisma/client": "^5.19.1",
+    "@prisma/client": "5.19.1",
+    "bcrypt": "^5.1.1",
     "fastify": "^5.0.0",
     "jsonwebtoken": "^9.0.2",
     "multer": "^1.4.5-lts.1",
     "prisma": "^5.19.1"
   },
   "devDependencies": {
-    "@types/node": "^22.5.5"
+    "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/node": "^22.5.5",
+    "prisma": "5.19.1"
   }
 }

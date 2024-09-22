@@ -1,23 +1,39 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import {
-  createUser,
+  signUp,
   getUser,
   updateUser,
   deleteUser,
+  signIn,
 } from "../../services/userService";
-import { CreateUserDto, UpdateUserDto, UserIdDto } from "../dto/user.dto";
+import { LoginDto, signUpDto, UpdateUserDto, UserIdDto } from "../dto/user.dto";
 import { getErrorMessage } from "../../utils/errors";
+import { authenticate } from "../middleware/authMiddleware";
 
 export const userController = {
   create: async (
-    request: FastifyRequest<{ Body: CreateUserDto }>,
+    request: FastifyRequest<{ Body: signUpDto }>,
     reply: FastifyReply
   ) => {
     try {
       const { name, email, password } = request.body;
-      const user = await createUser(name, email, password);
-      console.log("create user", user);
-      return reply.code(201).send(user);
+      const { user, accessToken } = await signUp(name, email, password);
+      return reply.code(201).send({ user, accessToken });
+    } catch (error) {
+      return getErrorMessage(error, reply);
+    }
+  },
+
+  login: async (
+    request: FastifyRequest<{ Body: LoginDto }>,
+    reply: FastifyReply
+  ) => {
+    const authResult = await authenticate(request, reply);
+    if (authResult) return;
+    try {
+      const { email, password } = request.body;
+      const response = await signIn(email, password);
+      return reply.code(200).send(response);
     } catch (error) {
       return getErrorMessage(error, reply);
     }

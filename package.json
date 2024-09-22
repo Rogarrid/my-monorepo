@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "generate:prisma-client": "cd packages/api/prisma && npx prisma generate",
+    "migrate:prisma": "npx prisma migrate dev --schema=./packages/api/prisma/schema.prisma",
     "build": "tsc --outDir ./dist",
     "start:dev": "npm run generate:prisma-client && npm run build && concurrently \"tsc --watch --outDir ./dist\" \"nodemon ./dist/api/index.js\""
   },
@@ -13,8 +14,13 @@
     "packages/*"
   ],
   "devDependencies": {
+    "@types/uuid": "^10.0.0",
     "concurrently": "^9.0.1",
     "nodemon": "^3.1.6",
     "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "uuid": "^10.0.0"
   }
 }
