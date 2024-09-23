@@ -33,16 +33,7 @@ export const signUp = async (userData: signUpDto) => {
   };
 };
 
-export const signIn = async (loginData: LoginDto, token?: string) => {
-  if (token) {
-    try {
-      jwt.verify(token, secretKey);
-      return { message: "User already authenticated", token };
-    } catch (err) {
-      throw new Error("Invalid or expired token");
-    }
-  }
-
+export const signIn = async (loginData: LoginDto) => {
   const user = await prisma.user.findUnique({
     where: { email: loginData.email },
   });
@@ -50,7 +41,7 @@ export const signIn = async (loginData: LoginDto, token?: string) => {
     const newToken = jwt.sign({ id: user.id, role: user.role }, secretKey, {
       expiresIn: "1h",
     });
-    return { token: newToken };
+    return { user, token: newToken };
   }
 
   throw new Error("Invalid email or password");

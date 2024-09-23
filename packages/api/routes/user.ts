@@ -6,24 +6,34 @@ import {
   updateUserSchema,
   userIdSchema,
 } from "../dto/userSchema";
+import { authenticate } from "../middleware/authMiddleware";
+import { LoginDto, UpdateUserDto, UserIdDto } from "../dto/user.dto";
 
 async function userRoutes(fastify: FastifyInstance) {
   fastify.post("/users", { schema: signUpSchema }, userController.create);
-  fastify.post(
+  fastify.post<{ Body: LoginDto }>(
     "/users/login",
     {
+      preHandler: authenticate,
       schema: loginSchema,
     },
     userController.login
   );
-
-  fastify.get("/users/:id", { schema: userIdSchema }, userController.get);
-  fastify.put(
+  fastify.get<{ Params: UserIdDto }>(
     "/users/:id",
-    { schema: updateUserSchema },
+    { preHandler: authenticate, schema: userIdSchema },
+    userController.get
+  );
+  fastify.put<{ Params: UserIdDto; Body: UpdateUserDto }>(
+    "/users/:id",
+    { preHandler: authenticate, schema: updateUserSchema },
     userController.update
   );
-  fastify.delete("/users/:id", { schema: userIdSchema }, userController.delete);
+  fastify.delete<{ Params: UserIdDto }>(
+    "/users/:id",
+    { preHandler: authenticate, schema: userIdSchema },
+    userController.delete
+  );
 }
 
 export default userRoutes;
