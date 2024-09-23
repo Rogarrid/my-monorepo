@@ -70,3 +70,19 @@ export const deleteUser = async (id: number) => {
     where: { id },
   });
 };
+
+export const refreshTokenService = async (refreshToken: string) => {
+  const user = await prisma.user.findUnique({
+    where: { refreshToken },
+  });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  const newAccessToken = jwt.sign({ id: user.id, role: user.role }, secretKey, {
+    expiresIn: "2h",
+  });
+
+  return { newAccessToken, refreshToken };
+};

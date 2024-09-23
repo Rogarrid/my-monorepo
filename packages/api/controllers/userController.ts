@@ -5,8 +5,15 @@ import {
   updateUser,
   deleteUser,
   signIn,
+  refreshTokenService,
 } from "../../services/userService";
-import { LoginDto, signUpDto, UpdateUserDto, UserIdDto } from "../dto/user.dto";
+import {
+  LoginDto,
+  RefreshTokenDto,
+  signUpDto,
+  UpdateUserDto,
+  UserIdDto,
+} from "../dto/user.dto";
 import { getErrorMessage } from "../../utils/errors";
 import { authenticate } from "../middleware/authMiddleware";
 
@@ -72,6 +79,25 @@ export const userController = {
     try {
       await deleteUser(parseInt(request.params.id, 10));
       return reply.code(200).send({ message: "User deleted" });
+    } catch (error) {
+      return getErrorMessage(error, reply);
+    }
+  },
+
+  refreshToken: async (
+    request: FastifyRequest<{ Body: RefreshTokenDto }>,
+    reply: FastifyReply
+  ) => {
+    try {
+      const { refreshToken } = request.body;
+
+      if (!refreshToken) {
+        return reply.code(400).send({ message: "Refresh token not found" });
+      }
+
+      const accessToken = await refreshTokenService(refreshToken);
+
+      return reply.send({ accessToken });
     } catch (error) {
       return getErrorMessage(error, reply);
     }

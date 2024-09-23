@@ -48,3 +48,13 @@ export const userIdSchema = {
     },
   },
 };
+
+export const refreshTokenSchema = {
+  body: {
+    type: "object",
+    properties: {
+      refreshToken: { type: "string" },
+    },
+    required: ["refreshToken"],
+  },
+};

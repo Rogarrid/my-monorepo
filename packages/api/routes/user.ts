@@ -5,9 +5,15 @@ import {
   signUpSchema,
   updateUserSchema,
   userIdSchema,
+  refreshTokenSchema,
 } from "../dto/userSchema";
 import { authenticate } from "../middleware/authMiddleware";
-import { LoginDto, UpdateUserDto, UserIdDto } from "../dto/user.dto";
+import {
+  LoginDto,
+  RefreshTokenDto,
+  UpdateUserDto,
+  UserIdDto,
+} from "../dto/user.dto";
 
 async function userRoutes(fastify: FastifyInstance) {
   fastify.post("/users", { schema: signUpSchema }, userController.create);
@@ -33,6 +39,11 @@ async function userRoutes(fastify: FastifyInstance) {
     "/users/:id",
     { preHandler: authenticate(), schema: userIdSchema },
     userController.delete
+  );
+  fastify.post<{ Body: RefreshTokenDto }>(
+    "/users/refresh-token",
+    { schema: refreshTokenSchema },
+    userController.refreshToken
   );
 }
 

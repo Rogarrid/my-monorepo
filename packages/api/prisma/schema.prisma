@@ -14,7 +14,7 @@ model User {
   name      String?
   role      String   @default("user")
   posts     Post[]   @relation("UserPosts")
-  refreshToken String?
+  refreshToken String? @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
