@@ -1,4 +1,4 @@
-import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
+import { FastifyInstance } from "fastify";
 import { userController } from "./../controllers/userController";
 import {
   loginSchema,
@@ -10,7 +10,7 @@ import {
 async function userRoutes(fastify: FastifyInstance) {
   fastify.post("/users", { schema: signUpSchema }, userController.create);
   fastify.post(
-    "/login",
+    "/users/login",
     {
       schema: loginSchema,
     },

@@ -28,11 +28,11 @@ export const userController = {
     request: FastifyRequest<{ Body: LoginDto }>,
     reply: FastifyReply
   ) => {
-    const authResult = await authenticate(request, reply);
-    if (authResult) return;
+    const authHeader = request.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
     try {
       const loginData = request.body;
-      const response = await signIn(loginData);
+      const response = await signIn(loginData, token);
       return reply.code(200).send(response);
     } catch (error) {
       return getErrorMessage(error, reply);
