@@ -12,5 +12,5 @@
   "paths": {
     "@packages/*": ["packages/*"]
   },
-  "include": ["packages/**/*", "packages/api/types/**/*"]
+  "include": ["packages/**/*", "packages/api/types/**/*", "packages/api/*.js"]
 }

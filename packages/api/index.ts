@@ -1,12 +1,6 @@
-import Fastify from "fastify";
-import userRoute from "./routes/user";
-import dotenv from "dotenv";
-import path from "path";
-dotenv.config({ path: path.resolve(__dirname, "../../.env") });
+import { build } from "./build";
 
-const fastify = Fastify({ logger: true });
-
-fastify.register(userRoute);
+const fastify = build();
 
 fastify.listen({ port: 3000 }, (err, address) => {
   if (err) {

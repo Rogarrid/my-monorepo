@@ -15,6 +15,10 @@ import {
   UserIdDto,
 } from "../dto/user.dto";
 
+/**
+ * Registers user-related routes with Fastify.
+ * @param fastify - The Fastify instance used for registering routes.
+ */
 async function userRoutes(fastify: FastifyInstance) {
   fastify.post("/users", { schema: signUpSchema }, userController.create);
   fastify.post<{ Body: LoginDto }>(

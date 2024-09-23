@@ -15,9 +15,13 @@ import {
   UserIdDto,
 } from "../dto/user.dto";
 import { getErrorMessage } from "../../utils/errors";
-import { authenticate } from "../middleware/authMiddleware";
 
 export const userController = {
+  /**
+   * Creates a new user.
+   * @param request - Contains the data for the new user.
+   * @param reply - The response that will be sent to the client.
+   */
   create: async (
     request: FastifyRequest<{ Body: signUpDto }>,
     reply: FastifyReply
@@ -31,6 +35,11 @@ export const userController = {
     }
   },
 
+  /**
+   * Logs in a user and returns an access token.
+   * @param request - Contains the login credentials.
+   * @param reply - The response that will be sent to the client.
+   */
   login: async (
     request: FastifyRequest<{ Body: LoginDto }>,
     reply: FastifyReply
@@ -44,6 +53,11 @@ export const userController = {
     }
   },
 
+  /**
+   * Retrieves a user by ID.
+   * @param request - Contains the user ID in the parameters.
+   * @param reply - The response that will be sent to the client.
+   */
   get: async (
     request: FastifyRequest<{ Params: UserIdDto }>,
     reply: FastifyReply
@@ -58,6 +72,11 @@ export const userController = {
     }
   },
 
+  /**
+   * Updates a user's details.
+   * @param request - Contains the user ID in the parameters and updated data in the body.
+   * @param reply - The response that will be sent to the client.
+   */
   update: async (
     request: FastifyRequest<{ Params: UserIdDto; Body: UpdateUserDto }>,
     reply: FastifyReply
@@ -72,6 +91,11 @@ export const userController = {
     }
   },
 
+  /**
+   * Deletes a user by ID.
+   * @param request - Contains the user ID in the parameters.
+   * @param reply - The response that will be sent to the client.
+   */
   delete: async (
     request: FastifyRequest<{ Params: UserIdDto }>,
     reply: FastifyReply
@@ -84,6 +108,11 @@ export const userController = {
     }
   },
 
+  /**
+   * Refreshes the access token using the provided refresh token.
+   * @param request - Contains the refresh token in the body.
+   * @param reply - The response that will be sent to the client.
+   */
   refreshToken: async (
     request: FastifyRequest<{ Body: RefreshTokenDto }>,
     reply: FastifyReply

@@ -3,6 +3,11 @@ import jwt from "jsonwebtoken";
 
 const secretKey = process.env.JWT_SECRET!;
 
+/**
+ * Middleware to authenticate users using JWT.
+ * @param roles - An array of roles that are allowed to access the route.
+ * If provided, the user must have one of the specified roles.
+ */
 export const authenticate = (roles: string[] = []) => {
   return async (request: FastifyRequest, reply: FastifyReply) => {
     const authHeader = request.headers["authorization"];
