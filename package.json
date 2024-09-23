@@ -5,10 +5,9 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "generate:prisma-client": "cd packages/api/prisma && npx prisma generate",
     "migrate:prisma": "npx prisma migrate dev --schema=./packages/api/prisma/schema.prisma",
     "build": "tsc --outDir ./dist",
-    "start:dev": "npm run generate:prisma-client && npm run build && concurrently \"tsc --watch --outDir ./dist\" \"nodemon ./dist/api/index.js\""
+    "start:dev": "npm run migrate:prisma && npm run build && concurrently \"tsc --watch --outDir ./dist\" \"nodemon ./dist/api/index.js\""
   },
   "workspaces": [
     "packages/*"

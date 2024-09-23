@@ -16,8 +16,8 @@ export const userController = {
     reply: FastifyReply
   ) => {
     try {
-      const { name, email, password } = request.body;
-      const { user, accessToken } = await signUp(name, email, password);
+      const userData = request.body;
+      const { user, accessToken } = await signUp(userData);
       return reply.code(201).send({ user, accessToken });
     } catch (error) {
       return getErrorMessage(error, reply);
@@ -31,8 +31,8 @@ export const userController = {
     const authResult = await authenticate(request, reply);
     if (authResult) return;
     try {
-      const { email, password } = request.body;
-      const response = await signIn(email, password);
+      const loginData = request.body;
+      const response = await signIn(loginData);
       return reply.code(200).send(response);
     } catch (error) {
       return getErrorMessage(error, reply);
@@ -59,8 +59,8 @@ export const userController = {
   ) => {
     try {
       const id = parseInt(request.params.id, 10);
-      const { name, email } = request.body;
-      const user = await updateUser(id, name, email);
+      const userData = request.body;
+      const user = await updateUser(id, userData);
       return reply.send(user);
     } catch (error) {
       return getErrorMessage(error, reply);

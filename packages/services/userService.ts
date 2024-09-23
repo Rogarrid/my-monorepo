@@ -2,15 +2,16 @@ import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
+import { LoginDto, UpdateUserDto, signUpDto } from "../api/dto/user.dto";
 
 const prisma = new PrismaClient();
 const secretKey = process.env.JWT_SECRET!;
 console.log("secretKey", secretKey);
 
-export const signUp = async (name: string, email: string, password: string) => {
-  const hashedPassword = await bcrypt.hash(password, 10);
+export const signUp = async (userData: signUpDto) => {
+  const hashedPassword = await bcrypt.hash(userData.password, 10);
   const user = await prisma.user.create({
-    data: { name, email, password: hashedPassword },
+    data: { ...userData, password: hashedPassword },
   });
 
   const accessToken = jwt.sign({ id: user.id, role: user.role }, secretKey, {
@@ -30,16 +31,36 @@ export const signUp = async (name: string, email: string, password: string) => {
   };
 };
 
+export const signIn = async (loginData: LoginDto) => {
+  const user = await prisma.user.findUnique({
+    where: { email: loginData.email },
+  });
+  if (user && (await bcrypt.compare(loginData.password, user.password))) {
+    const token = jwt.sign({ id: user.id, role: user.role }, secretKey, {
+      expiresIn: "1h",
+    });
+    return { token };
+  }
+  throw new Error("Invalid email or password");
+};
+
 export const getUser = async (id: number) => {
   return await prisma.user.findUnique({
     where: { id },
   });
 };
 
-export const updateUser = async (id: number, name: string, email: string) => {
+export const updateUser = async (id: number, userData: UpdateUserDto) => {
+  const data: any = { ...userData };
+
+  if (userData.password) {
+    const hashedPassword = await bcrypt.hash(userData.password, 10);
+    data.password = hashedPassword;
+  }
+
   return await prisma.user.update({
     where: { id },
-    data: { name, email },
+    data,
   });
 };
 
@@ -47,17 +68,4 @@ export const deleteUser = async (id: number) => {
   return await prisma.user.delete({
     where: { id },
   });
-};
-
-export const signIn = async (email: string, password: string) => {
-  const user = await prisma.user.findUnique({
-    where: { email },
-  });
-  if (user && (await bcrypt.compare(password, user.password))) {
-    const token = jwt.sign({ id: user.id, role: user.role }, secretKey, {
-      expiresIn: "1h",
-    });
-    return { token };
-  }
-  throw new Error("Invalid email or password");
 };
