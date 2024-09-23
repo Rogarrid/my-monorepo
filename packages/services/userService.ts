@@ -3,8 +3,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
 import { LoginDto, UpdateUserDto, signUpDto } from "../api/dto/user.dto";
-import { getErrorMessage } from "../utils/errors";
-import { FastifyReply } from "fastify";
 
 const prisma = new PrismaClient();
 const secretKey = process.env.JWT_SECRET!;
