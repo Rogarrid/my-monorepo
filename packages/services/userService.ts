@@ -3,6 +3,11 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { v4 as uuidv4 } from "uuid";
 import { LoginDto, UpdateUserDto, signUpDto } from "../api/dto/user.dto";
+import {
+  uploadImage,
+  getOptimizedImageUrl,
+  getTransformedImageUrl,
+} from "./cloudinaryService";
 
 /*** TODO:
  * - Implement validations to strengthen user password requirements.
@@ -94,6 +99,28 @@ export const updateUser = async (id: number, userData: UpdateUserDto) => {
 };
 
 /**
+ * Uploads a user image and returns the optimized and transformed URLs.
+ * @param imageUrl - The URL of the image to upload.
+ * @param publicId - The public ID of the image (optional).
+ * @returns An object containing the optimized and transformed URLs.
+ */
+export const uploadUserImageService = async (
+  imageUrl: string,
+  publicId?: string
+) => {
+  const uploadResult = await uploadImage(imageUrl, publicId);
+
+  const optimizedUrl = getOptimizedImageUrl(uploadResult.public_id);
+  const transformedUrl = getTransformedImageUrl(
+    uploadResult.public_id,
+    500,
+    500
+  );
+
+  return { optimizedUrl, transformedUrl };
+};
+
+/**
  * Deletes a user by ID.
  * @param id - The ID of the user to delete.
  * @returns The deleted user data.
@@ -123,5 +150,5 @@ export const refreshTokenService = async (refreshToken: string) => {
     expiresIn: "2h",
   });
 
-  return { newAccessToken, refreshToken };
+  return { newAccessToken };
 };

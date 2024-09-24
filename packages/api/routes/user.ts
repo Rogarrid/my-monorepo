@@ -6,9 +6,11 @@ import {
   updateUserSchema,
   userIdSchema,
   refreshTokenSchema,
+  uploadImageSchema,
 } from "../dto/userSchema";
 import { authenticate } from "../middleware/authMiddleware";
 import {
+  ImageUploadDto,
   LoginDto,
   RefreshTokenDto,
   UpdateUserDto,
@@ -21,6 +23,7 @@ import {
  */
 async function userRoutes(fastify: FastifyInstance) {
   fastify.post("/users", { schema: signUpSchema }, userController.create);
+
   fastify.post<{ Body: LoginDto }>(
     "/users/login",
     {
@@ -29,21 +32,31 @@ async function userRoutes(fastify: FastifyInstance) {
     },
     userController.login
   );
+
   fastify.get<{ Params: UserIdDto }>(
     "/users/:id",
     { preHandler: authenticate(["admin"]), schema: userIdSchema },
     userController.get
   );
+
   fastify.put<{ Params: UserIdDto; Body: UpdateUserDto }>(
     "/users/:id",
     { preHandler: authenticate(), schema: updateUserSchema },
     userController.update
   );
+
+  fastify.post<{ Body: ImageUploadDto }>(
+    "/users/upload-image",
+    { preHandler: authenticate(), schema: uploadImageSchema },
+    userController.uploadImage
+  );
+
   fastify.delete<{ Params: UserIdDto }>(
     "/users/:id",
     { preHandler: authenticate(), schema: userIdSchema },
     userController.delete
   );
+
   fastify.post<{ Body: RefreshTokenDto }>(
     "/users/refresh-token",
     { schema: refreshTokenSchema },

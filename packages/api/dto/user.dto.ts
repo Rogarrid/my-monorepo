@@ -11,6 +11,10 @@ export interface signUpDto extends UserDto {
 export interface UpdateUserDto extends UserDto {
   password?: string;
 }
+export interface ImageUploadDto {
+  imageUrl: string;
+  publicId?: string;
+}
 
 export interface UserIdDto {
   id: string;

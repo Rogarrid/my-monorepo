@@ -114,19 +114,39 @@ export const updateUserSchema = {
       description: "User updated successfully",
       type: "object",
       properties: {
-        user: {
-          type: "object",
-          description: "The created user object",
-          properties: {
-            id: { type: "number", description: "User ID" },
-            email: { type: "string", description: "User email" },
-            name: { type: ["string", "null"], description: "User name" },
-            role: { type: "string", description: "User role" },
-            refreshToken: {
-              type: ["string", "null"],
-              description: "User refresh token",
-            },
-          },
+        id: { type: "number", description: "User ID" },
+        email: { type: "string", description: "User email" },
+        name: { type: ["string", "null"], description: "User name" },
+        role: { type: "string", description: "User role" },
+        refreshToken: {
+          type: ["string", "null"],
+          description: "User refresh token",
+        },
+      },
+    },
+  },
+};
+
+export const uploadImageSchema = {
+  description: "Schema for uploading a user image",
+  tags: ["User"],
+  body: {
+    type: "object",
+    properties: {
+      imageUrl: { type: "string", description: "The image URL" },
+      publicId: { type: ["string", "null"], description: "The public ID" },
+    },
+    required: ["imageUrl"],
+  },
+  response: {
+    200: {
+      description: "Image uploaded successfully",
+      type: "object",
+      properties: {
+        optimizedUrl: { type: "string", description: "Optimized image URL" },
+        transformedUrl: {
+          type: "string",
+          description: "Transformed image URL",
         },
       },
     },

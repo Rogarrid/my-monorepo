@@ -6,8 +6,10 @@ import {
   deleteUser,
   signIn,
   refreshTokenService,
+  uploadUserImageService,
 } from "../../services/userService";
 import {
+  ImageUploadDto,
   LoginDto,
   RefreshTokenDto,
   signUpDto,
@@ -92,6 +94,28 @@ export const userController = {
   },
 
   /**
+   * Uploads an image to Cloudinary and returns the optimized and transformed URLs.
+   * @param request - Contains the image URL in the body.
+   * @param reply - The response that will be sent to the client.
+   */
+  uploadImage: async (
+    request: FastifyRequest<{ Body: ImageUploadDto }>,
+    reply: FastifyReply
+  ) => {
+    try {
+      const { imageUrl, publicId } = request.body;
+      const { optimizedUrl, transformedUrl } = await uploadUserImageService(
+        imageUrl,
+        publicId
+      );
+
+      return reply.code(200).send({ optimizedUrl, transformedUrl });
+    } catch (error) {
+      return getErrorMessage(error, reply);
+    }
+  },
+
+  /**
    * Deletes a user by ID.
    * @param request - Contains the user ID in the parameters.
    * @param reply - The response that will be sent to the client.
@@ -126,7 +150,10 @@ export const userController = {
 
       const accessToken = await refreshTokenService(refreshToken);
 
-      return reply.send({ accessToken });
+      return reply.send({
+        accessToken: accessToken.newAccessToken,
+        refreshToken,
+      });
     } catch (error) {
       return getErrorMessage(error, reply);
     }
