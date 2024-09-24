@@ -67,7 +67,6 @@ async function userRoutes(fastify: FastifyInstance) {
   fastify.get("/notifications", { websocket: true }, (connection) => {
     console.log("Client connected to WebSocket");
 
-    // Enviar un mensaje al cliente
     connection.send(
       JSON.stringify({ message: "Connected to real-time notifications" })
     );
@@ -76,10 +75,8 @@ async function userRoutes(fastify: FastifyInstance) {
       console.log("Received message from client:", message.toString());
     });
 
-    // Agregar el cliente a la lista de clientes
     WebSocketClient.addClient(connection);
 
-    // Manejo de la desconexión del cliente
     connection.on("close", () => {
       console.log("Client disconnected");
       WebSocketClient.removeClient(connection);
