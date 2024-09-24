@@ -330,10 +330,10 @@
     rfdc "^1.3.1"
     yaml "^2.4.2"
 
-"@fastify/websocket@^11.0.0":
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/@fastify/websocket/-/websocket-11.0.0.tgz#c977cc9d9c448f86c35fe934de7f988f0cdd597d"
-  integrity sha512-T+QeUaIDgEYyn+RN5vbbO2EZBRJOLGyZ5Y/N8dHxNREll4bN8ArRYsuXZ/WAVFZsqjz0HBjLw1eYq7eFwBzfiw==
+"@fastify/websocket@^11.0.1":
+  version "11.0.1"
+  resolved "https://registry.yarnpkg.com/@fastify/websocket/-/websocket-11.0.1.tgz#54daf87936678d543a3ab0779259701d1a4c8864"
+  integrity sha512-44yam5+t1I9v09hWBYO+ezV88+mb9Se2BjgERtzB/68+0mGeTfFkjBeDBe2y+ZdiPpeO2rhevhdnfrBm5mqH+Q==
   dependencies:
     duplexify "^4.1.3"
     fastify-plugin "^5.0.0"

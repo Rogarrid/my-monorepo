@@ -16,6 +16,7 @@ import {
   UpdateUserDto,
   UserIdDto,
 } from "../dto/user.dto";
+import { WebSocketClient } from "../../utils/webSocketClient";
 
 /**
  * Registers user-related routes with Fastify.
@@ -62,6 +63,28 @@ async function userRoutes(fastify: FastifyInstance) {
     { schema: refreshTokenSchema },
     userController.refreshToken
   );
+
+  fastify.get("/notifications", { websocket: true }, (connection) => {
+    console.log("Client connected to WebSocket");
+
+    // Enviar un mensaje al cliente
+    connection.send(
+      JSON.stringify({ message: "Connected to real-time notifications" })
+    );
+
+    connection.on("message", (message: Buffer | string) => {
+      console.log("Received message from client:", message.toString());
+    });
+
+    // Agregar el cliente a la lista de clientes
+    WebSocketClient.addClient(connection);
+
+    // Manejo de la desconexión del cliente
+    connection.on("close", () => {
+      console.log("Client disconnected");
+      WebSocketClient.removeClient(connection);
+    });
+  });
 }
 
 export default userRoutes;

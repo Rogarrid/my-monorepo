@@ -1,6 +1,7 @@
 import Fastify, { FastifyInstance } from "fastify";
-import userRoute from "./routes/user";
+import fastifyWebSocket from "@fastify/websocket";
 import swagger from "@fastify/swagger";
+import userRoute from "./routes/user";
 import dotenv from "dotenv";
 import path from "path";
 
@@ -8,6 +9,8 @@ dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
 export function build(): FastifyInstance {
   const fastify = Fastify({ logger: true });
+
+  fastify.register(fastifyWebSocket);
 
   fastify.register(swagger, {
     openapi: {

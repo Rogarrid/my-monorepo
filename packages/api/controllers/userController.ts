@@ -17,6 +17,7 @@ import {
   UserIdDto,
 } from "../dto/user.dto";
 import { getErrorMessage } from "../../utils/errors";
+import { WebSocketClient } from "../../utils/webSocketClient";
 
 export const userController = {
   /**
@@ -31,6 +32,9 @@ export const userController = {
     try {
       const userData = request.body;
       const { user, accessToken } = await signUp(userData);
+      WebSocketClient.broadcast(
+        JSON.stringify({ event: "USER_CREATED", data: user })
+      );
       return reply.code(200).send({ user, accessToken });
     } catch (error) {
       return getErrorMessage(error, reply);
@@ -126,6 +130,9 @@ export const userController = {
   ) => {
     try {
       await deleteUser(parseInt(request.params.id, 10));
+      WebSocketClient.broadcast(
+        JSON.stringify({ event: "USER_CREATED", data: request.params.id })
+      );
       return reply.code(200).send({ message: "User deleted" });
     } catch (error) {
       return getErrorMessage(error, reply);
