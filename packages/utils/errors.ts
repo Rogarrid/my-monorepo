@@ -20,8 +20,7 @@ export function getErrorMessage(error: any, reply: any) {
   }
 
   if (error.code) {
-    // Establecemos un código de respuesta si está presente
-    const statusCode = error.statusCode || 400; // o el código que corresponda
+    const statusCode = error.statusCode || 400;
     return reply.code(statusCode).send({
       errorCode: error.code,
       message: error.meta?.cause || "An error occurred",

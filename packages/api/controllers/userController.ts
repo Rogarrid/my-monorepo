@@ -29,7 +29,7 @@ export const userController = {
     try {
       const userData = request.body;
       const { user, accessToken } = await signUp(userData);
-      return reply.code(201).send({ user, accessToken });
+      return reply.code(200).send({ user, accessToken });
     } catch (error) {
       return getErrorMessage(error, reply);
     }
@@ -46,8 +46,8 @@ export const userController = {
   ) => {
     try {
       const loginData = request.body;
-      const response = await signIn(loginData);
-      return reply.code(200).send(response);
+      const { user, accessToken } = await signIn(loginData);
+      return reply.code(200).send({ user, accessToken });
     } catch (error) {
       return getErrorMessage(error, reply);
     }

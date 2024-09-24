@@ -56,7 +56,7 @@ export const signIn = async (loginData: LoginDto) => {
     const newToken = jwt.sign({ id: user.id, role: user.role }, secretKey, {
       expiresIn: "1h",
     });
-    return { user, token: newToken };
+    return { user, accessToken: newToken };
   }
 
   throw new Error("Invalid email or password");

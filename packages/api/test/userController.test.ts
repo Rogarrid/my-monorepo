@@ -45,7 +45,7 @@ describe("userController", () => {
       await userController.create(request, reply);
 
       expect(signUp).toHaveBeenCalledWith(request.body);
-      expect(reply.code).toHaveBeenCalledWith(201);
+      expect(reply.code).toHaveBeenCalledWith(200);
       expect(reply.send).toHaveBeenCalledWith({
         user: mockUser,
         accessToken: mockAccessToken,

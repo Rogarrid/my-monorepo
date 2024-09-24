@@ -16,11 +16,24 @@ export const signUpSchema = {
     },
   },
   response: {
-    201: {
+    200: {
       description: "User created successfully",
       type: "object",
       properties: {
-        user: { type: "object", description: "The created user object" },
+        user: {
+          type: "object",
+          description: "The created user object",
+          properties: {
+            id: { type: "number", description: "User ID" },
+            email: { type: "string", description: "User email" },
+            name: { type: ["string", "null"], description: "User name" },
+            role: { type: "string", description: "User role" },
+            refreshToken: {
+              type: ["string", "null"],
+              description: "User refresh token",
+            },
+          },
+        },
         accessToken: { type: "string", description: "JWT access token" },
       },
     },
@@ -47,8 +60,21 @@ export const loginSchema = {
       description: "Login successful",
       type: "object",
       properties: {
+        user: {
+          type: "object",
+          description: "The created user object",
+          properties: {
+            id: { type: "number", description: "User ID" },
+            email: { type: "string", description: "User email" },
+            name: { type: ["string", "null"], description: "User name" },
+            role: { type: "string", description: "User role" },
+            refreshToken: {
+              type: ["string", "null"],
+              description: "User refresh token",
+            },
+          },
+        },
         accessToken: { type: "string", description: "JWT access token" },
-        refreshToken: { type: "string", description: "JWT refresh token" },
       },
     },
     401: {
@@ -88,7 +114,20 @@ export const updateUserSchema = {
       description: "User updated successfully",
       type: "object",
       properties: {
-        user: { type: "object", description: "The updated user object" },
+        user: {
+          type: "object",
+          description: "The created user object",
+          properties: {
+            id: { type: "number", description: "User ID" },
+            email: { type: "string", description: "User email" },
+            name: { type: ["string", "null"], description: "User name" },
+            role: { type: "string", description: "User role" },
+            refreshToken: {
+              type: ["string", "null"],
+              description: "User refresh token",
+            },
+          },
+        },
       },
     },
   },
@@ -109,7 +148,14 @@ export const userIdSchema = {
       description: "User retrieved successfully",
       type: "object",
       properties: {
-        user: { type: "object", description: "The retrieved user object" },
+        id: { type: "number", description: "User ID" },
+        email: { type: "string", description: "User email" },
+        name: { type: ["string", "null"], description: "User name" },
+        role: { type: "string", description: "User role" },
+        refreshToken: {
+          type: ["string", "null"],
+          description: "User refresh token",
+        },
       },
     },
     404: {
