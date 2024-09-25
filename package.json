@@ -8,7 +8,9 @@
     "migrate:prisma-generate-client": "npx prisma generate --schema=./packages/api/prisma/schema.prisma",
     "migrate:prisma": "npx prisma migrate dev --schema=./packages/api/prisma/schema.prisma",
     "build": "tsc --outDir ./dist",
+    "build:deployment": "yarn install && tsc --outDir ./dist",
     "start:dev": "npm run migrate:prisma && npm run build && concurrently \"tsc --watch --outDir ./dist\" \"nodemon ./dist/api/index.js\"",
+    "start:desployment": "npx prisma migrate dev --schema=./packages/api/prisma/schema.prisma && npx prisma generate --schema=./packages/api/prisma/schema.prisma && node ./dist/api/index.js",
     "test": "yarn workspace api test"
   },
   "workspaces": [

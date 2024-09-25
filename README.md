@@ -29,7 +29,6 @@ This project is a monorepo that contains an API developed with Fastify, TypeScri
 - Node.js >= 16
 - Yarn
 - PostgreSQL: You must have PostgreSQL installed and configured.
-- Cloudinary: You must have a Cloudinary account to manage image uploads.
 
 ## Installation
 
@@ -124,7 +123,7 @@ my-monorepo/
 - **api**: Central module that manages routes, controllers and API logic.
 - **services**: Services to handle business logic and external interactions.
 - **utils**: Shared functions and utilities within the monorepo.
-  
+
 ## Main API Paths
 
 ### Authentication
