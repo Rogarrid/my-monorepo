@@ -166,6 +166,8 @@ Prisma is used as an ORM to handle database operations. You can find the Prisma 
 
 ## Considerations and pending improvements
 
+- **Image Upload Functionality**: Images can be uploaded and updated in Cloudinary successfully in the local environment. However, there are issues with this functionality in the deployed environment, which need to be addressed to ensure seamless operation across both environments.
+
 - **Additional endpoints**: The following endpoints are planned to be created to manage user publications:
 
   - Endpoint to create and save a new publication associated with an existing user.
