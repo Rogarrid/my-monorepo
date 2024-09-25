@@ -124,9 +124,7 @@ my-monorepo/
 - **api**: Central module that manages routes, controllers and API logic.
 - **services**: Services to handle business logic and external interactions.
 - **utils**: Shared functions and utilities within the monorepo.
-
-Here’s the corrected version of your **Main API Paths** in English:
-
+  
 ## Main API Paths
 
 ### Authentication
