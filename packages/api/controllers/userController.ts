@@ -88,9 +88,17 @@ export const userController = {
     reply: FastifyReply
   ) => {
     try {
-      const id = parseInt(request.params.id, 10);
+      const userId = parseInt(request.params.id, 10);
+      const currentUser = request["user"];
+
+      if (currentUser.role !== "admin" && currentUser.id !== userId) {
+        return reply.code(403).send({
+          message: "Access denied. You can only modify your own account.",
+        });
+      }
+
       const userData = request.body;
-      const user = await updateUser(id, userData);
+      const user = await updateUser(userId, userData);
       return reply.send(user);
     } catch (error) {
       return getErrorMessage(error, reply);
@@ -129,9 +137,16 @@ export const userController = {
     reply: FastifyReply
   ) => {
     try {
-      await deleteUser(parseInt(request.params.id, 10));
+      const userId = parseInt(request.params.id, 10);
+      const currentUser = request["user"];
+      if (currentUser.role !== "admin" && currentUser.id !== userId) {
+        return reply.code(403).send({
+          message: "Access denied. You can only delete your own account.",
+        });
+      }
+      await deleteUser(userId);
       WebSocketClient.broadcast(
-        JSON.stringify({ event: "USER_CREATED", data: request.params.id })
+        JSON.stringify({ event: "USER_DELETED", data: request.params.id })
       );
       return reply.code(200).send({ message: "User deleted" });
     } catch (error) {

@@ -153,6 +153,27 @@ export const uploadImageSchema = {
   },
 };
 
+export const deleteSchema = {
+  description: "Schema for deleting a user",
+  tags: ["User"],
+  params: {
+    type: "object",
+    properties: {
+      id: { type: "string", description: "The user's ID" },
+    },
+    required: ["id"],
+  },
+  response: {
+    200: {
+      description: "User deleted successfully",
+      type: "object",
+      properties: {
+        message: { type: "string", description: "User deleted message" },
+      },
+    },
+  },
+};
+
 export const userIdSchema = {
   description: "Schema for retrieving a user by ID",
   tags: ["User"],

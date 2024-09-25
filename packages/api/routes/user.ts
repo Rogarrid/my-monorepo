@@ -7,6 +7,7 @@ import {
   userIdSchema,
   refreshTokenSchema,
   uploadImageSchema,
+  deleteSchema,
 } from "../dto/userSchema";
 import { authenticate } from "../middleware/authMiddleware";
 import {
@@ -35,7 +36,6 @@ async function userRoutes(fastify: FastifyInstance) {
   fastify.post<{ Body: LoginDto }>(
     "/users/login",
     {
-      preHandler: authenticate(),
       schema: loginSchema,
     },
     userController.login
@@ -61,7 +61,7 @@ async function userRoutes(fastify: FastifyInstance) {
 
   fastify.delete<{ Params: UserIdDto }>(
     "/users/:id",
-    { preHandler: authenticate(), schema: userIdSchema },
+    { preHandler: authenticate(), schema: deleteSchema },
     userController.delete
   );
 
