@@ -125,19 +125,31 @@ my-monorepo/
 - **services**: Services to handle business logic and external interactions.
 - **utils**: Shared functions and utilities within the monorepo.
 
+Here’s the corrected version of your **Main API Paths** in English:
+
+---
+
 ## Main API Paths
 
-# Authentication
+### Authentication
 
-- POST /users: Create a new user (registration) and get a JWT token.
-- POST /users/login: Log in and get a JWT token.
-- POST /users/refresh-token: Refresh JWT token.
+- **POST /users**: Create a new user (sign up) and receive a JWT token.
+- **POST /users/login**: Log in and receive a JWT token.
+- **POST /users/refresh-token**: Refresh the JWT token using a refresh token.
 
-# User Management
+### User Management
 
-- GET /users/:id: Get user details (requires admin role).
-- PUT /users/:id: Update user details.
-- DELETE /users/:id: Delete a user.
+- **GET /users/:id**: Retrieve user details (requires admin role).
+- **PUT /users/:id**: Update user details.
+- **DELETE /users/:id**: Delete a user.
+
+### Image Management
+
+- **POST /users/upload-image**: Upload an image and retrieve optimized and transformed URLs (requires authentication).
+
+### WebSocket
+
+- **GET /notifications**: Connect to the real-time notifications service using WebSocket.
 
 ## Role and Permission Management
 
