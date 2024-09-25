@@ -127,8 +127,6 @@ my-monorepo/
 
 Here’s the corrected version of your **Main API Paths** in English:
 
----
-
 ## Main API Paths
 
 ### Authentication
