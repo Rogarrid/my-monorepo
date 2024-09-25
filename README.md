@@ -56,14 +56,6 @@ yarn install
 yarn migrate:prisma
 ```
 
-## Environment Variables
-
-This project requires certain environment variables to function correctly. However, these are not included in the repository for security reasons.
-
-If you need the environment variables necessary to run the project, please contact me to obtain them.
-
-rocio.garrido.fer@gmail.com
-
 ## Running the project
 
 To start the server in development mode (at the root of the project):
@@ -124,6 +116,16 @@ my-monorepo/
 - **services**: Services to handle business logic and external interactions.
 - **utils**: Shared functions and utilities within the monorepo.
 
+## Deployment
+
+The application is deployed on Render and can be accessed via the following links:
+
+- **API Endpoint**: [https://my-monorepo-cnnq.onrender.com](https://my-monorepo-cnnq.onrender.com)  
+  Access the application’s API.
+
+- **API Documentation**: [https://my-monorepo-cnnq.onrender.com/documentation](https://my-monorepo-cnnq.onrender.com/documentation)  
+  View the documentation for available endpoints.
+
 ## Main API Paths
 
 ### Authentication
@@ -161,8 +163,6 @@ fastify.get<{ Params: UserIdDto }>(
 ## Prisma and Database (Postgres)
 
 Prisma is used as an ORM to handle database operations. You can find the Prisma schema in `packages/api/prisma/schema.prisma`. To perform CRUD operations, Prisma is used inside the drivers.
-
-## Deployment
 
 ## Considerations and pending improvements
 
