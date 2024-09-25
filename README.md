@@ -30,6 +30,14 @@ This project is a monorepo that contains an API developed with Fastify, TypeScri
 - Yarn
 - PostgreSQL: You must have PostgreSQL installed and configured.
 
+## Environment Variables
+
+The necessary environment variables to run this application **are not included** in the repository for security reasons.
+
+If you would like to run the project locally, please reach out to me for information on the required environment variables and how to set them up.
+
+rocio.garrido.fer@gmail.com
+
 ## Installation
 
 1. Clone this repository:
