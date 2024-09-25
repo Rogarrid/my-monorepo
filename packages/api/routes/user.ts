@@ -18,6 +18,13 @@ import {
 } from "../dto/user.dto";
 import { WebSocketClient } from "../../utils/webSocketClient";
 
+/*** TODO:
+ * Create endpoint to create and save a new post to an existing user.
+ * Create endpoint to delete post of an existing user.
+ * Create endpoint to modify post created in an existing user
+ * The prism schema for creating a post associated with an existing user is now created.
+ */
+
 /**
  * Registers user-related routes with Fastify.
  * @param fastify - The Fastify instance used for registering routes.
