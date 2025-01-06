@@ -17,7 +17,7 @@ This project is a monorepo that contains an API developed with Fastify, TypeScri
 11. [Deployment](#deployment)
 12. [Main API Paths](#main-api-paths)
 13. [Role and Permission Management](#role-and-permission-management)
-14. [Prisma and Database (Postgres)](#prisma-and-database-postgres)
+14. [Prisma and Database (PostgreSQL)](#prisma-and-database-postgreSQL)
 15. [Considerations and pending improvements](#considerations-and-pending-improvements)
 16. [Contribution](#contribution)
 
@@ -191,7 +191,7 @@ fastify.get<{ Params: UserIdDto }>(
   );
 ```
 
-## Prisma and Database (Postgres)
+## Prisma and Database (PostgreSQL)
 
 Prisma is used as an ORM to handle database operations. You can find the Prisma schema in `packages/api/prisma/schema.prisma`. To perform CRUD operations, Prisma is used inside the drivers.
 
