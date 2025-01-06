@@ -2,6 +2,25 @@
 
 This project is a monorepo that contains an API developed with Fastify, TypeScript and Prisma. The API includes authentication, role-based authorisation, user management, image upload and real-time notifications via WebSockets. The project uses PostgreSQL as a database and follows a monorepo structure with several packages.
 
+## Table of Contents
+
+1. [Features](#features)
+2. [Technologies used](#technologies-used)
+3. [Prerequisites for starting a local project](#prerequisites-for-starting-a-local-project)
+4. [Environment Variables](#environment-variables)
+5. [Installation](#installation)
+6. [Running the project](#running-the-project)
+7. [Use of application](#use-of-application)
+8. [Running tests](#running-tests)
+9. [Project structure](#project-structure)
+10. [Main packages](#main-packages)
+11. [Deployment](#deployment)
+12. [Main API Paths](#main-api-paths)
+13. [Role and Permission Management](#role-and-permission-management)
+14. [Prisma and Database (Postgres)](#prisma-and-database-postgres)
+15. [Considerations and pending improvements](#considerations-and-pending-improvements)
+16. [Contribution](#contribution)
+
 ## Features
 
 - JWT authentication: Users can log in, update their data and delete account. .
