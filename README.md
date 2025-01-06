@@ -74,6 +74,10 @@ yarn start:dev
 
 The server will start at http://localhost:3000.
 
+## Use of application:
+
+Once the project is started locally, use localhost:port in tools like Postman or cURL to test API endpoints.
+
 ## Running tests
 
 You can run unit tests using Jest (at the root of the project):
@@ -128,8 +132,8 @@ my-monorepo/
 
 The application is deployed on Render and can be accessed via the following links:
 
-- **API Endpoint**: [https://my-monorepo-cnnq.onrender.com](https://my-monorepo-cnnq.onrender.com)  
-  Access the application’s API.
+- **API URL**: [https://my-monorepo-cnnq.onrender.com](https://my-monorepo-cnnq.onrender.com)  
+  Use this URL in tools like Postman or cURL to test the API endpoints.
 
 - **API Documentation**: [https://my-monorepo-cnnq.onrender.com/documentation](https://my-monorepo-cnnq.onrender.com/documentation)  
   View the documentation for available endpoints.
